@@ -1,0 +1,27 @@
+void mousePressed() {
+  if (attempts < 3) { // allow mouse input only if the user has not clicked on non-yellow pattern 3 times
+    int col = mouseX / 50;
+    int row = mouseY / 50;
+    int colorIndex = hiddenPattern[row][col];
+    if (colorIndex == 0) {
+      fill(0, 230, 0); // lt green
+    } else {
+      fill(0); // black
+    }
+    rect(col*50, row*50, 50, 50);
+
+    clickedPattern[row][col] = 1; // mark the clicked pattern in the array
+
+    if (colorIndex != 1) { // if the pattern is not yellow
+      attempts++;
+      if (attempts == 3) { // if the user has clicked on non-yellow pattern 3 times
+        background(255, 0, 0); // turn the screen red
+        noLoop(); // disable mouse input
+        textAlign(CENTER);
+        textSize(32);
+        fill(255);
+        text("Game Over", width/2, height/2); // display game over message
+      }
+    }
+  }
+}
