@@ -1,0 +1,55 @@
+int[][] hiddenPattern = {
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {0, 0, 0, 1, 1, 0, 0, 0, 1, 1},
+  {0, 0, 0, 1, 1, 0, 0, 0, 1, 1},
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  {0, 0, 0, 1, 1, 0, 0, 0, 1, 1},
+  {0, 0, 0, 1, 1, 0, 0, 0, 1, 1}
+};
+
+int[][] clickedPattern = new int[10][10]; // array to keep track of the clicked patterns
+
+int attempts = 0; // keep track of the number of attempts
+
+void setup() {
+  size(500, 500);
+  background(255);
+  drawGrid();
+}
+
+void draw() {
+}
+
+void drawGrid() {
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      fill(0, 255, 0); // green
+      rect(i*50, j*50, 50, 50);
+    }
+  }
+}
+
+void mousePressed() {
+  int col = mouseX / 50;
+  int row = mouseY / 50;
+  int colorIndex = hiddenPattern[row][col];
+  if (colorIndex == 0) {
+    fill(0, 230, 0); // lt green
+  } else {
+    fill(0); // black
+  }
+  rect(col*50, row*50, 50, 50);
+
+  clickedPattern[row][col] = 1; // mark the clicked pattern in the array
+
+  if (colorIndex != 0) { // if the pattern is not yellow
+    attempts++;
+    if (attempts == 3) { // if the user has clicked on non-yellow pattern 3 times
+      background(255, 0, 0); // turn the screen red
+    }
+  }
+}
