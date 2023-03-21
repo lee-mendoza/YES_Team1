@@ -1,0 +1,43 @@
+// Create the 2D array that hold your secret pattern
+let hiddenPattern = [
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [0, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+  [0, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+  [0, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+  [0, 0, 0, 1, 1, 0, 0, 0, 1, 1]
+];
+
+function setup() {
+  fullscreenCanvas();
+  background(255);
+  drawGrid();
+}
+
+function draw() {
+}
+
+function drawGrid() {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      fill(0, 255, 0); // green
+      rect(i*50, j*50, 50, 50);
+    }
+  }
+}
+
+function touchStarted() {
+  let col = floor(touchX / 50);
+  let row = floor(touchY / 50);
+  let colorIndex = hiddenPattern[row][col];
+  if (colorIndex == 0) {
+    fill(255, 255, 0); // yellow
+  } else {
+    fill(0); // black
+  }
+  rect(col*50, row*50, 50, 50);
+}
